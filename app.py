@@ -106,10 +106,8 @@ st.markdown("""
 def load_data():
 
     possible_paths = [
-        Path("data/bird_observation_cleaned.csv"),
-        Path("./data/bird_observation_cleaned.csv"),
-        Path("bird_observation_cleaned.csv"),
-        Path("../data/bird_observation_cleaned.csv")
+        base_dir / "data" / "bird_observation_cleaned.csv",
+        base_dir / "Bird_Species_Observation_Analysis" / "data" / "bird_observation_cleaned.csv",
     ]
 
     file_path = None
