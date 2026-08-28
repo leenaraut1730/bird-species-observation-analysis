@@ -105,20 +105,29 @@ st.markdown("""
 @st.cache_data
 def load_data():
 
+    # Get the folder where app.py is located
+    base_dir = Path(__file__).resolve().parent
+
+    # Possible dataset locations
     possible_paths = [
         base_dir / "data" / "bird_observation_cleaned.csv",
         base_dir / "Bird_Species_Observation_Analysis" / "data" / "bird_observation_cleaned.csv",
     ]
 
-    file_path = None
-
+    # Find the dataset
     for path in possible_paths:
         if path.exists():
-            file_path = path
-            break
+            df = pd.read_csv(path)
+            return df
 
-    if file_path is None:
-        return None
+    # If dataset is not found
+    st.error("Dataset not found.")
+    st.info(
+        "Expected location: "
+        "Bird_Species_Observation_Analysis/data/bird_observation_cleaned.csv"
+    )
+    st.stop()
+        
 
     try:
         df = pd.read_csv(file_path)
